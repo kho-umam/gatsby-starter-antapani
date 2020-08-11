@@ -1,3 +1,24 @@
+const gatsbyRemarkPlugins = [
+  {
+    resolve: `gatsby-remark-images`,
+    options: {
+      maxWidth: 590,
+    },
+  },
+  {
+    resolve: `gatsby-remark-responsive-iframe`,
+    options: {
+      wrapperStyle: `margin-bottom: 1.0725rem`,
+    },
+  },
+  {
+    resolve: `gatsby-remark-copy-linked-files`,
+  },
+  {
+    resolve: `gatsby-remark-smartypants`,
+  },
+]
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Starter Blog`,
@@ -12,6 +33,14 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: gatsbyRemarkPlugins
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -48,8 +77,6 @@ module.exports = {
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
