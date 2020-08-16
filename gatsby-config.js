@@ -11,12 +11,8 @@ const gatsbyRemarkPlugins = [
       wrapperStyle: `margin-bottom: 1.0725rem`,
     },
   },
-  {
-    resolve: `gatsby-remark-copy-linked-files`,
-  },
-  {
-    resolve: `gatsby-remark-smartypants`,
-  },
+  `gatsby-remark-copy-linked-files`,
+  `gatsby-remark-smartypants`,
 ]
 
 module.exports = {
@@ -36,12 +32,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: gatsbyRemarkPlugins
-      }
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
@@ -56,25 +46,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 590,
-            },
-          },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
-          },
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
-        ],
+        extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins
       },
     },
     {
@@ -83,7 +58,7 @@ module.exports = {
         //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
     },
-    `gatsby-plugin-feed`,
+    `gatsby-plugin-feed-mdx`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
