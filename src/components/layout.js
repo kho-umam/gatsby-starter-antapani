@@ -11,9 +11,9 @@ const SiteWrapper = styled.div `
 `
 
 const Layout = ({ children }) => {
-
   return (
     <SiteWrapper>
+      <GlobalStyle />
       <SiteHeader />
       <main>{children}</main>
       <footer>
