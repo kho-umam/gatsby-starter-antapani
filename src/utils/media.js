@@ -1,21 +1,10 @@
-import { css } from 'styled-components';
-
-const sizes = {
-  desktop: 1024,
-  tablet: 768,
-  phone: 480,
-  phonesmall: 320,
-};
-
-// Iterate through the sizes and create a media template
-export default
-Object
-  .keys(sizes)
-  .reduce((acc, label) => {
-    acc[label] = (...args) => css`
-    @media (max-width: ${sizes[label]}px) {
-      ${css(...args)};
-    }
-  `;
-    return acc;
-  }, {});
+export default {
+  maxPhonesmall:  '(max-width: 319px)',
+  minPhonesmall:  '(min-width: 320px)',
+  maxPhone:       '(max-width: 479px)',
+  minPhone:       '(min-width: 480px)',
+  maxTablet:      '(max-width: 767px)',
+  minTablet:      '(min-width: 768px)',
+  maxDesktop:     '(max-width: 1023px)',
+  minDesktop:     '(min-width: 1024px)',
+}
