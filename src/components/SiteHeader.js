@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useStaticQuery, Link, graphql } from "gatsby"
 import styled from "styled-components"
 import media from "../utils/media"
@@ -6,23 +6,31 @@ import { rhythm } from "../utils/typography"
 
 const SiteHeaderContainer = styled.header`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  align-items: center;
+  transition: top .25s ease-in-out .2s;
   min-height: ${rhythm(2)};
-  margin-bottom: ${rhythm(1)};
-  @media ${media.maxPhone} {
-    display: flex;
-  }
+  position: fixed;
+  max-width: ${rhythm(24)};
+  width: calc(100% - 2rem);
+  background-color: #fff;
+`
 
-  > a {
-    white-space: nowrap;
-  }
+const HeaderBrand = styled.div`
+  display: flex !important;
+  align-items: center;
+  order: 0;
+  min-height: 4rem;
 `
 
 const HeaderMenus = styled.div`
   display: flex;
+  margin-left: auto;
   @media ${media.maxPhone} {
+    display: block;
+    flex-basis: 100%;
+
     ${props =>
     props.isToggled
       ? 'display: block !important'
@@ -106,9 +114,29 @@ const SiteHeader = () => {
   const [isToggled, setToggle] = useState(false)
   const toggle = () => setToggle(!isToggled)
 
+  const [isHide, setIsHide] = useState(false)
+  const [, setYPos] = useState(0)
+
+  useEffect(() => {
+    function setVisible(status) {
+      setYPos(prevYPos => {
+        const currentYPos = window.pageYOffset;
+
+        if (currentYPos > 0) setIsHide(prevYPos < currentYPos);
+
+        return currentYPos;
+      });
+    }
+    document.addEventListener('scroll', setVisible);
+    return () => document.removeEventListener('scroll', setVisible);
+  }, []);
+
   return (
-    <SiteHeaderContainer className="site-menu">
-      <Link to="/" className="site-title">{site.siteMetadata.title}</Link>
+    <SiteHeaderContainer className={`${isHide ? 'hideHeader' : 'showHeader'} ${isToggled ? 'menuOpened' : 'menuClosed'}`}>
+      <HeaderBrand>
+        <Link to="/" className="site-title">{site.siteMetadata.title}</Link>
+      </HeaderBrand>
+
       <BurgerButton onClick={toggle} aria-label={`${isToggled ? 'close menu' : 'open menu'}`} >
         <BurgerContent isToggled={isToggled} />
       </BurgerButton>
