@@ -15,6 +15,7 @@ const SiteHeaderContainer = styled.header`
   max-width: ${rhythm(24)};
   width: calc(100% - 2rem);
   background-color: #fff;
+  z-index: 999;
 `
 
 const HeaderBrand = styled.div`
