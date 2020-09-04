@@ -1,10 +1,9 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-
+import { graphql}  from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import PostList from "../components/PostList"
 
 const IndexPage = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
@@ -13,33 +12,11 @@ const IndexPage = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Home" />
-      <Bio />
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
-        return (
-          <article key={node.fields.slug}>
-            <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={`/blog${node.fields.slug}`}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </section>
-          </article>
-        )
-      })}
+      <section><Bio /></section>
+      <section>
+        <h1>Latest Posts</h1>
+        <PostList posts={posts} />
+      </section>
     </Layout>
   )
 }

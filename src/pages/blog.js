@@ -3,36 +3,20 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import PostList from "../components/PostList"
 
 const BlogPage = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMdx.edges
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle} >
       <SEO title="All posts" />
-      <div style={{ margin: "20px 0 40px" }}>
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
-          return (
-            <div key={node.fields.slug}>
-              <h3>
-                <Link
-                  style={{ boxShadow: `none` }}
-                  to={`/blog${node.fields.slug}`}
-                >
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </div>
-          )
-        })}
+      <div>
+        <h1>
+          Blog
+        </h1>
+        <PostList posts={posts} />
       </div>
       <Link to="/">
       </Link>
