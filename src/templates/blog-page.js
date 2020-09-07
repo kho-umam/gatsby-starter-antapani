@@ -49,9 +49,10 @@ const BlogPage = ({ data, location, pageContext }) => {
 
         {Array.from({ length: numPages }, (_, i) => (
           <li key={`pagination-number${i + 1}`}>
-            <Link to={`/blog/${i === 0 ? '' : i + 1}`}>
-              {i + 1}
-            </Link>
+            {i + 1 === currentPage
+              ? <span>{currentPage}</span>
+              : <Link to={`/blog/${i === 0 ? '' : i + 1}`}>{i + 1}</Link>
+            }
           </li>
         ))}
 
