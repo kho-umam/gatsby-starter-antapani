@@ -1,14 +1,15 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import { Tag } from "../components/Tag"
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.mdx
+  const tags = post.frontmatter.tags
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
 
@@ -36,6 +37,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             }}
           >
             {post.frontmatter.date}
+            <Tag tags={tags} />
           </p>
         </header>
         <MDXRenderer>{post.body}</MDXRenderer>
@@ -94,6 +96,7 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
+        tags
         date(formatString: "MMMM DD, YYYY")
         description
       }
