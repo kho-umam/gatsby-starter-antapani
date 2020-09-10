@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql}  from "gatsby"
+import { graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -41,8 +41,9 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
             title
+            tags
+            date(formatString: "MMMM DD, YYYY")
             description
           }
         }
