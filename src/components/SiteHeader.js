@@ -12,8 +12,8 @@ const SiteHeaderContainer = styled.header`
   transition: top .25s ease-in-out .2s;
   min-height: ${rhythm(2)};
   position: fixed;
-  max-width: ${rhythm(24)};
-  width: calc(100% - 2rem);
+  max-width: ${rhythm(26)};
+  width: 100%;
   background-color: #fff;
   z-index: 999;
 `
@@ -28,7 +28,7 @@ const HeaderBrand = styled.div`
 const HeaderMenus = styled.div`
   display: flex;
   margin-left: auto;
-  @media ${media.maxPhone} {
+  @media ${media.maxTablet} {
     display: block;
     flex-basis: 100%;
 
@@ -54,7 +54,7 @@ const BurgerButton = styled.button`
   outline: none;
   display: block;
   margin-left: auto;
-  @media ${media.minPhone} {
+  @media ${media.minTablet} {
     display: none;
   }
 `
