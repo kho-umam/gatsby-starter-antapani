@@ -6,11 +6,14 @@ import styled from "styled-components"
 
 const SiteWrapper = styled.div`
   margin: 0 auto;
-  max-width: ${rhythm(24)};
-  padding: 0 ${rhythm(3 / 4)};
+  max-width: ${rhythm(26)};
 
   > main {
     margin-top: 5rem;
+  }
+
+  > header, main, footer {
+    padding: 0 ${rhythm(3 / 4)}; 
   }
 `
 
