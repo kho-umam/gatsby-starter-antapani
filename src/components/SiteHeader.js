@@ -3,6 +3,7 @@ import { useStaticQuery, Link, graphql } from "gatsby"
 import styled from "styled-components"
 import media from "../utils/media"
 import { rhythm } from "../utils/typography"
+import SearchInput from './searchInput'
 
 const SiteHeaderContainer = styled.header`
   display: flex;
@@ -16,6 +17,7 @@ const SiteHeaderContainer = styled.header`
   width: 100%;
   background-color: #fff;
   z-index: 999;
+  padding-bottom: 0.5rem;
 `
 
 const HeaderBrand = styled.div`
@@ -28,6 +30,7 @@ const HeaderBrand = styled.div`
 const HeaderMenus = styled.div`
   display: flex;
   margin-left: auto;
+  padding-bottom: 0.5rem;
   @media ${media.maxTablet} {
     display: block;
     flex-basis: 100%;
@@ -38,7 +41,7 @@ const HeaderMenus = styled.div`
       : `display: none`};
   }
 
-  a:not(:last-child) {
+  > *:not(:last-child) {
     margin-right: 0.8rem;
   }
 `
@@ -112,9 +115,11 @@ const SiteHeader = () => {
     }
   `)
 
+  // responsible to hide and show menu on click
   const [isToggled, setToggle] = useState(false)
   const toggle = () => setToggle(!isToggled)
 
+  // responsible to hide and show header on sroll
   const [isHide, setIsHide] = useState(false)
   const [, setYPos] = useState(0)
 
@@ -133,7 +138,7 @@ const SiteHeader = () => {
   }, []);
 
   return (
-    <SiteHeaderContainer className={`${isHide ? 'hideHeader' : 'showHeader'} ${isToggled ? 'menuOpened' : 'menuClosed'}`}>
+    <SiteHeaderContainer className={`${isHide ? 'hideHeader' : 'showHeader'} ${isToggled ? 'menuActive' : ''}`}>
       <HeaderBrand>
         <Link to="/" className="site-title">{site.siteMetadata.title}</Link>
       </HeaderBrand>
@@ -143,10 +148,9 @@ const SiteHeader = () => {
       </BurgerButton>
 
       <HeaderMenus isToggled={isToggled}>
+        <SearchInput />
         <Link to={`/blog`}>Blog</Link>
         <Link to={`/tags`}>Tags</Link>
-        <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </HeaderMenus>
     </SiteHeaderContainer>
   )
