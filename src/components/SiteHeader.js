@@ -119,7 +119,7 @@ const SiteHeader = () => {
   const [, setYPos] = useState(0)
 
   useEffect(() => {
-    function setVisible(status) {
+    function setVisible() {
       setYPos(prevYPos => {
         const currentYPos = window.pageYOffset;
 
@@ -144,6 +144,7 @@ const SiteHeader = () => {
 
       <HeaderMenus isToggled={isToggled}>
         <Link to={`/blog`}>Blog</Link>
+        <Link to={`/tags`}>Tags</Link>
         <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </HeaderMenus>
