@@ -23,7 +23,7 @@ module.exports = {
       summary: `who lives and works in San Francisco building useful things.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
+    siteUrl: `https://gatsby-starter-antapani.netlify.app/`,
     social: {
       twitter: `kylemathews`,
     },
@@ -72,6 +72,30 @@ module.exports = {
         display: `minimal-ui`,
         icon: `content/assets/gatsby-icon.png`,
       },
+    },
+    {
+      resolve: 'gatsby-plugin-lunr',
+      options: {
+        languages: [{ name: "en" }],
+        fields: [
+          { name: "title", store: true, attributes: { boost: 20 } },
+          { name: "url", store: true },
+          { name: "description", store: true, attributes: { boost: 5 } },
+          { name: "content" },
+          { name: "date", store: true },
+          { name: "tag", store: true },
+        ],
+        resolvers: {
+          Mdx: {
+            title: node => node.frontmatter.title,
+            url: node => node.fields.slug,
+            description: node => node.frontmatter.description,
+            content: node => node.rawBody,
+            date: node => node.frontmatter.date,
+            tags: node => node.frontmatter.tags
+          }
+        }
+      }
     },
     `gatsby-plugin-react-helmet`,
     {
