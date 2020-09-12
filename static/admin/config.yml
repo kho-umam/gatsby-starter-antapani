@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: kho-umam/gatsby-starter-antapani
-  branch: master
+  branch: with-netlify
 
 media_folder: content/assets
 public_folder: ../assets
