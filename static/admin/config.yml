@@ -1,0 +1,31 @@
+backend:
+  name: github
+  repo: kho-umam/gatsby-starter-antapani
+  branch: master
+
+media_folder: content/assets
+public_folder: ../assets
+
+collections:
+  - name: blog
+    label: Blog
+    folder: content/blog
+    create: true
+    fields:
+      - { name: path, label: Path }
+      - { name: date, label: Date, widget: date }
+      - { name: title, label: Title }
+      - { name: description, label: Description }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: mdx
+    label: Mdx Blog
+    description: Mdx Blog
+    folder: content/mdx
+    extension: "mdx"
+    format: "frontmatter"
+    widget: mdx
+    create: true
+    fields:
+      - { label: Title, name: title, widget: string, required: true }
+      - { name: body, label: Body, widget: mdx }
